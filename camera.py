@@ -1,12 +1,15 @@
 import cv2
-from imutils.video.pivideostream import PiVideoStream
 import imutils
 import time
 import numpy as np
+from webcamvideostream import WebcamVideoStream
 
 class VideoCamera(object):
-    def __init__(self, flip = False):
-        self.vs = PiVideoStream().start()
+    def __init__(self, flip = False, is_raspberry=True):
+        if is_raspberry:
+            self.vs = imutils.video.pivideostream.PiVideoStream().start()
+        else:
+            self.vs = WebcamVideoStream(src=0).start()
         self.flip = flip
         time.sleep(2.0)
 
